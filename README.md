@@ -4,6 +4,7 @@ This is a personal reimplementation of Holistically-Nested Edge Detection [1] us
 <a href="https://arxiv.org/abs/1504.06375" rel="Paper"><img src="http://www.arxiv-sanity.com/static/thumbs/1504.06375v2.pdf.jpg" alt="Paper" width="100%"></a>
 
 For the original version of this work, please see: https://github.com/s9xie/hed
+<br />
 For another reimplementation based on Caffe, please see: https://github.com/zeakey/hed
 
 ## usage
@@ -13,7 +14,7 @@ To run it on your own image, use the following command. Please make sure to see 
 python run.py --model bsds500 --in ./images/sample.png --out ./out.png
 ```
 
-I am afraid that this reimplementation is not entirely true to the original. It achieves an ODS=0.774 versus the official ODS=0.780 on the BSDS500 dataset, evaluated using [this code](hhttps://github.com/zeakey/edgeval). Please feel free to contribute to this repository by submitting issues and pull requests.
+I am afraid that this reimplementation is not entirely true to the original, even though it uses the official weights. It achieves an ODS=0.774 versus the official ODS=0.780 on the BSDS500 dataset, evaluated using [this code](hhttps://github.com/zeakey/edgeval). Please feel free to contribute to this repository by submitting issues and pull requests.
 
 ## comparison
 <p align="center"><img src="comparison/comparison.gif?raw=true" alt="Comparison"></p>
