@@ -1,0 +1,1 @@
+The used example originates from the BSDS500 dataset: https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/resources.html
