@@ -14,7 +14,7 @@ To run it on your own image, use the following command. Please make sure to see 
 python run.py --model bsds500 --in ./images/sample.png --out ./out.png
 ```
 
-I am afraid that this reimplementation is not entirely true to the original, even though it uses the official weights. It achieves an ODS=0.774 versus the official ODS=0.780 on the BSDS500 dataset, evaluated using [this code](hhttps://github.com/zeakey/edgeval). Please feel free to contribute to this repository by submitting issues and pull requests.
+I am afraid that this reimplementation is not entirely true to the original Caffe version, even though it uses the official weights. It achieves an ODS=0.774 versus the official ODS=0.780 on the BSDS500 dataset, evaluated using [this code](hhttps://github.com/zeakey/edgeval). Please feel free to contribute to this repository by submitting issues and pull requests.
 
 ## comparison
 <p align="center"><img src="comparison/comparison.gif?raw=true" alt="Comparison"></p>
