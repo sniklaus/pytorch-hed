@@ -95,7 +95,7 @@ class Network(torch.nn.Module):
 			torch.nn.Sigmoid()
 		)
 
-		self.load_state_dict(torch.load('./models/' + arguments_strModel + '.pytorch'))
+		self.load_state_dict(torch.load('./network-' + arguments_strModel + '.pytorch'))
 	# end
 
 	def forward(self, tensorInput):
