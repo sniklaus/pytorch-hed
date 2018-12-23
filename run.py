@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import torch
-import torch.utils.serialization
 
 import getopt
 import math
@@ -13,7 +12,7 @@ import sys
 
 ##########################################################
 
-assert(int(torch.__version__.replace('.', '')) >= 40) # requires at least pytorch version 0.4.0
+assert(int(str('').join(torch.__version__.split('.')[0:3])) >= 40) # requires at least pytorch version 0.4.0
 
 torch.set_grad_enabled(False) # make sure to not compute gradients for computational performance
 
