@@ -1,5 +1,5 @@
 # pytorch-hed
-This is a personal reimplementation of Holistically-Nested Edge Detection [1] using PyTorch. Should you be making use of this work, please cite the paper accordingly. Also, make sure to adhere to the licensing terms of the authors. Should you be making use of this particular implementation, please acknowledge it appropriately.
+This is a personal reimplementation of Holistically-Nested Edge Detection [1] using PyTorch. Should you be making use of this work, please cite the paper accordingly. Also, make sure to adhere to the licensing terms of the authors. Should you be making use of this particular implementation, please acknowledge it appropriately [2].
 
 <a href="https://arxiv.org/abs/1504.06375" rel="Paper"><img src="http://www.arxiv-sanity.com/static/thumbs/1504.06375v2.pdf.jpg" alt="Paper" width="100%"></a>
 
@@ -30,4 +30,11 @@ I am afraid that this reimplementation is not entirely true to the original Caff
          booktitle = {IEEE International Conference on Computer Vision},
          year = {2015}
      }
+
+[2]  @misc{pytorch-hed,
+         author = {Simon Niklaus},
+         title = {A Reimplementation of {HED} Using {PyTorch}},
+         year = {2018},
+         howpublished = {\url{https://github.com/sniklaus/pytorch-hed}}
+    }
 ```
