@@ -12,7 +12,7 @@ import sys
 
 ##########################################################
 
-assert(int(str('').join(torch.__version__.split('.')[0:3])) >= 41) # requires at least pytorch version 0.4.0
+assert(int(str('').join(torch.__version__.split('.')[0:3])) >= 41) # requires at least pytorch version 0.4.1
 
 torch.set_grad_enabled(False) # make sure to not compute gradients for computational performance
 
@@ -131,31 +131,13 @@ moduleNetwork = Network().cuda().eval()
 ##########################################################
 
 def estimate(tensorInput):
-	tensorOutput = torch.FloatTensor()
-
 	intWidth = tensorInput.size(2)
 	intHeight = tensorInput.size(1)
 
 	assert(intWidth == 480) # remember that there is no guarantee for correctness, comment this line out if you acknowledge this and want to continue
 	assert(intHeight == 320) # remember that there is no guarantee for correctness, comment this line out if you acknowledge this and want to continue
 
-	if True:
-		tensorInput = tensorInput.cuda()
-		tensorOutput = tensorOutput.cuda()
-	# end
-
-	if True:
-		tensorPreprocessed = tensorInput.view(1, 3, intHeight, intWidth)
-
-		tensorOutput.resize_(1, intHeight, intWidth).copy_(moduleNetwork(tensorPreprocessed)[0, :, :, :])
-	# end
-
-	if True:
-		tensorInput = tensorInput.cpu()
-		tensorOutput = tensorOutput.cpu()
-	# end
-
-	return tensorOutput
+	return moduleNetwork(tensorInput.cuda().view(1, 3, intHeight, intWidth))[0, :, :, :].cpu()
 # end
 
 ##########################################################

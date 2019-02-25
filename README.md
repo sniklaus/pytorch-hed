@@ -30,7 +30,9 @@ I am afraid that this reimplementation is not entirely true to the original Caff
          booktitle = {IEEE International Conference on Computer Vision},
          year = {2015}
      }
+```
 
+```
 [2]  @misc{pytorch-hed,
          author = {Simon Niklaus},
          title = {A Reimplementation of {HED} Using {PyTorch}},
