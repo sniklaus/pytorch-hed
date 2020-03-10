@@ -92,7 +92,7 @@ class Network(torch.nn.Module):
 			torch.nn.Sigmoid()
 		)
 
-		self.load_state_dict(torch.load('./network-' + arguments_strModel + '.pytorch'))
+		self.load_state_dict(torch.load(__file__.replace('run.py', 'network-' + arguments_strModel + '.pytorch')))
 	# end
 
 	def forward(self, tensorInput):
@@ -114,23 +114,29 @@ class Network(torch.nn.Module):
 		tensorScoreFou = self.moduleScoreFou(tensorVggFou)
 		tensorScoreFiv = self.moduleScoreFiv(tensorVggFiv)
 
-		tensorScoreOne = torch.nn.functional.interpolate(input=tensorScoreOne, size=(tensorInput.size(2), tensorInput.size(3)), mode='bilinear', align_corners=False)
-		tensorScoreTwo = torch.nn.functional.interpolate(input=tensorScoreTwo, size=(tensorInput.size(2), tensorInput.size(3)), mode='bilinear', align_corners=False)
-		tensorScoreThr = torch.nn.functional.interpolate(input=tensorScoreThr, size=(tensorInput.size(2), tensorInput.size(3)), mode='bilinear', align_corners=False)
-		tensorScoreFou = torch.nn.functional.interpolate(input=tensorScoreFou, size=(tensorInput.size(2), tensorInput.size(3)), mode='bilinear', align_corners=False)
-		tensorScoreFiv = torch.nn.functional.interpolate(input=tensorScoreFiv, size=(tensorInput.size(2), tensorInput.size(3)), mode='bilinear', align_corners=False)
+		tensorScoreOne = torch.nn.functional.interpolate(input=tensorScoreOne, size=(tensorInput.shape[2], tensorInput.shape[3]), mode='bilinear', align_corners=False)
+		tensorScoreTwo = torch.nn.functional.interpolate(input=tensorScoreTwo, size=(tensorInput.shape[2], tensorInput.shape[3]), mode='bilinear', align_corners=False)
+		tensorScoreThr = torch.nn.functional.interpolate(input=tensorScoreThr, size=(tensorInput.shape[2], tensorInput.shape[3]), mode='bilinear', align_corners=False)
+		tensorScoreFou = torch.nn.functional.interpolate(input=tensorScoreFou, size=(tensorInput.shape[2], tensorInput.shape[3]), mode='bilinear', align_corners=False)
+		tensorScoreFiv = torch.nn.functional.interpolate(input=tensorScoreFiv, size=(tensorInput.shape[2], tensorInput.shape[3]), mode='bilinear', align_corners=False)
 
 		return self.moduleCombine(torch.cat([ tensorScoreOne, tensorScoreTwo, tensorScoreThr, tensorScoreFou, tensorScoreFiv ], 1))
 	# end
 # end
 
-moduleNetwork = Network().cuda().eval()
+moduleNetwork = None
 
 ##########################################################
 
 def estimate(tensorInput):
-	intWidth = tensorInput.size(2)
-	intHeight = tensorInput.size(1)
+	global moduleNetwork
+
+	if moduleNetwork is None:
+		moduleNetwork = Network().cuda().eval()
+	# end
+
+	intWidth = tensorInput.shape[2]
+	intHeight = tensorInput.shape[1]
 
 	assert(intWidth == 480) # remember that there is no guarantee for correctness, comment this line out if you acknowledge this and want to continue
 	assert(intHeight == 320) # remember that there is no guarantee for correctness, comment this line out if you acknowledge this and want to continue
