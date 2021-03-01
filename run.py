@@ -20,7 +20,7 @@ torch.backends.cudnn.enabled = True # make sure to use cudnn for computational p
 
 ##########################################################
 
-arguments_strModel = 'bsds500'
+arguments_strModel = 'bsds500' # only 'bsds500' for now
 arguments_strIn = './images/sample.png'
 arguments_strOut = './out.png'
 
