@@ -34,7 +34,7 @@ for strOption, strArgument in getopt.getopt(sys.argv[1:], '', [ strParameter[2:]
 
 class Network(torch.nn.Module):
 	def __init__(self):
-		super(Network, self).__init__()
+		super().__init__()
 
 		self.netVggOne = torch.nn.Sequential(
 			torch.nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, stride=1, padding=1),
