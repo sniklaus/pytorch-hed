@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import torch
+import torchvision
 
 import getopt
 import math
@@ -144,9 +145,9 @@ def estimate(tenInput):
 ##########################################################
 
 if __name__ == '__main__':
-	tenInput = torch.FloatTensor(numpy.ascontiguousarray(numpy.array(PIL.Image.open(arguments_strIn))[:, :, ::-1].transpose(2, 0, 1).astype(numpy.float32) * (1.0 / 255.0)))
+	tenInput = torchvision.transforms.ToTensor()(PIL.Image.open(arguments_strIn))
 
 	tenOutput = estimate(tenInput)
 
-	PIL.Image.fromarray((tenOutput.clip(0.0, 1.0).numpy().transpose(1, 2, 0)[:, :, 0] * 255.0).astype(numpy.uint8)).save(arguments_strOut)
+	torchvision.transforms.ToPILImage()(tenOutput).save(arguments_strOut)
 # end
