@@ -4,10 +4,6 @@ import torch
 import torchvision
 
 import getopt
-import math
-import numpy
-import os
-import PIL
 import PIL.Image
 import sys
 
