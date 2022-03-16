@@ -1,14 +1,11 @@
 #!/usr/bin/env python
 
-import torch
-
 import getopt
-import math
 import numpy
-import os
 import PIL
 import PIL.Image
 import sys
+import torch
 
 ##########################################################
 
