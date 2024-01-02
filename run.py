@@ -15,14 +15,18 @@ torch.backends.cudnn.enabled = True # make sure to use cudnn for computational p
 
 ##########################################################
 
-arguments_strModel = 'bsds500' # only 'bsds500' for now
-arguments_strIn = './images/sample.png'
-arguments_strOut = './out.png'
+args_strModel = 'bsds500' # only 'bsds500' for now
+args_strIn = './images/sample.png'
+args_strOut = './out.png'
 
-for strOption, strArgument in getopt.getopt(sys.argv[1:], '', [ strParameter[2:] + '=' for strParameter in sys.argv[1::2] ])[0]:
-    if strOption == '--model' and strArgument != '': arguments_strModel = strArgument # which model to use
-    if strOption == '--in' and strArgument != '': arguments_strIn = strArgument # path to the input image
-    if strOption == '--out' and strArgument != '': arguments_strOut = strArgument # path to where the output should be stored
+for strOption, strArg in getopt.getopt(sys.argv[1:], '', [
+    'model=',
+    'in=',
+    'out=',
+])[0]:
+    if strOption == '--model' and strArg != '': args_strModel = strArg # which model to use
+    if strOption == '--in' and strArg != '': args_strIn = strArg # path to the input image
+    if strOption == '--out' and strArg != '': args_strOut = strArg # path to where the output should be stored
 # end
 
 ##########################################################
@@ -87,7 +91,7 @@ class Network(torch.nn.Module):
             torch.nn.Sigmoid()
         )
 
-        self.load_state_dict({ strKey.replace('module', 'net'): tenWeight for strKey, tenWeight in torch.hub.load_state_dict_from_url(url='http://content.sniklaus.com/github/pytorch-hed/network-' + arguments_strModel + '.pytorch', file_name='hed-' + arguments_strModel).items() })
+        self.load_state_dict({ strKey.replace('module', 'net'): tenWeight for strKey, tenWeight in torch.hub.load_state_dict_from_url(url='http://content.sniklaus.com/github/pytorch-hed/network-' + args_strModel + '.pytorch', file_name='hed-' + args_strModel).items() })
     # end
 
     def forward(self, tenInput):
@@ -139,9 +143,9 @@ def estimate(tenInput):
 ##########################################################
 
 if __name__ == '__main__':
-    tenInput = torch.FloatTensor(numpy.ascontiguousarray(numpy.array(PIL.Image.open(arguments_strIn))[:, :, ::-1].transpose(2, 0, 1).astype(numpy.float32) * (1.0 / 255.0)))
+    tenInput = torch.FloatTensor(numpy.ascontiguousarray(numpy.array(PIL.Image.open(args_strIn))[:, :, ::-1].transpose(2, 0, 1).astype(numpy.float32) * (1.0 / 255.0)))
 
     tenOutput = estimate(tenInput)
 
-    PIL.Image.fromarray((tenOutput.clip(0.0, 1.0).numpy().transpose(1, 2, 0)[:, :, 0] * 255.0).astype(numpy.uint8)).save(arguments_strOut)
+    PIL.Image.fromarray((tenOutput.clip(0.0, 1.0).numpy().transpose(1, 2, 0)[:, :, 0] * 255.0).astype(numpy.uint8)).save(args_strOut)
 # end
